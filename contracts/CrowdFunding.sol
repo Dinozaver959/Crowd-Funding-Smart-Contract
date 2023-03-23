@@ -8,7 +8,7 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
  * @title CrowdFund
  * @dev Implements crowdfunding platform for ERC20 tokens
  */
-contract CrowdFunding {
+contract CrowdFund {
 
     struct Project {
         address owner;           // owner of the project
@@ -125,7 +125,7 @@ contract CrowdFunding {
         projects[project].amountRaised = 0;
 
         // transfer ERC20 to owner
-        IERC20(erc20Token).transferFrom(address(this), msg.sender, amount);
+        IERC20(erc20Token).transfer(msg.sender, amount);
 
         // emit event
         emit TokensWithdrawenByOwner(msg.sender, project, amount, erc20Token);  
@@ -149,7 +149,7 @@ contract CrowdFunding {
         // projects[project].amountRaised -= amountDonatedByUser;
 
         // transfer ERC20 to user
-        IERC20(erc20Token).transferFrom(address(this), msg.sender, amountDonatedByUser);
+        IERC20(erc20Token).transfer(msg.sender, amountDonatedByUser);
 
         // emit event
         emit TokensWithdrawenByUser(msg.sender, project, amountDonatedByUser, erc20Token);  
